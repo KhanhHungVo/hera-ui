@@ -1,3 +1,4 @@
+import { UserComponent } from './views/user/user.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -80,6 +81,13 @@ export const routes: Routes = [
       {
         path: 'theme',
         loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
+      },
+      {
+        path: 'user',
+        component: UserComponent,
+        data: {
+          title: 'User Info'
+        }
       },
       {
         path: 'widgets',
