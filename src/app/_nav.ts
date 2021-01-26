@@ -20,9 +20,9 @@ export const navItems: INavData[] = [
     icon: 'icon-user'
   },
   {
-    name: 'Asset',
-    url: '/asset',
-    icon: 'fa fa-money' 
+    name: 'Orders',
+    url: '/orders',
+    icon: 'icon-wallet'
   },
   {
     title: true,

@@ -90,6 +90,13 @@ export const routes: Routes = [
         }
       },
       {
+        path:'orders',
+        data: {
+          title: 'Orders'
+        },
+        loadChildren: () => import('./views/orders/order.module').then(x =>x.OrderModule)
+      },
+      {
         path: 'widgets',
         loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
       }

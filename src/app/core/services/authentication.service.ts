@@ -16,11 +16,8 @@ import { error } from '@angular/compiler/src/util';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private user: SocialUser;
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
-  private url: string;
-  private endPoint: string;
   private googleSingInUrl: string = `${environment.apiUrl}/Authentication/sigin-google`;
   private fbSignInUrl: string = `${environment.apiUrl}/Authentication/signin-facebook`;
   private basicSignInUrl: string = `${environment.apiUrl}/Authentication/login`;
