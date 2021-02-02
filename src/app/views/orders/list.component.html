@@ -19,12 +19,12 @@
             <td>{{item.orderDate | date: 'dd-MM-yyyy'}}</td>
             <td>{{item.name}}</td>
             <td>{{item.symbol}}</td>
-            <td>{{item.investmentValue}}</td>
-            <td>{{item.orderPrice}}</td>
-            <td>{{item.currentPrice}}</td>
-            <td>{{item.marketValue}}</td>
-            <td>{{item.gainLoss}}</td>
-            <td>{{item.gainLossPercentage | percent}}</td>
+            <td>{{item.investmentValue | heraCurrency}}</td>
+            <td>{{item.orderPrice | heraCurrency}}</td>
+            <td>{{item.currentPrice | heraCurrency}}</td>
+            <td>{{item.marketValue | heraCurrency}}</td>
+            <td>{{item.gainLoss | heraCurrency}}</td>
+            <td>{{item.gainLossPercentage| percent}}</td>
             <td>{{item.done}}</td>
             <td style="white-space: nowrap">
                 <a class="btn btn-sm btn-primary mr-1" routerLink="edit/{{item.id}}" >Edit</a>

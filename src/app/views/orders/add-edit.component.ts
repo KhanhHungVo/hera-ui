@@ -39,35 +39,35 @@ export class AddEditComponent implements OnInit {
                 this.orderForm.controls.volume.patchValue(volume, {emitEvent:false});
             }
             if(val.volume > 0 && val.currentPrice > 0){
-                const marketValue = val.currentPrice*val.volume;
+                const marketValue = (val.currentPrice*val.volume).toFixed(2);
                 this.orderForm.controls.marketValue.patchValue(marketValue, {emitEvent:false});
             }
             if(val.investmentValue > 0 && val.marketValue > 0){
                 const gainLoss = val.marketValue - val.investmentValue;
-                const gainLossPercentage = gainLoss/val.investmentValue;
-                this.orderForm.controls.gainLoss.patchValue(gainLoss, {emitEvent:false});
-                this.orderForm.controls.gainLossPercentage.patchValue(gainLossPercentage, {emitEvent:false});
+                const gainLossPercentage = (gainLoss/val.investmentValue)*100;
+                this.orderForm.controls.gainLoss.patchValue(gainLoss.toFixed(2), {emitEvent:false});
+                this.orderForm.controls.gainLossPercentage.patchValue(gainLossPercentage.toFixed(2), {emitEvent:false});
             }
         });
         
-
         if (!this.isAddMode) {
             this.orderService.getById(this.id)
                 .pipe(first())
                 .subscribe(x => {
                     this.orderForm.patchValue(x); 
-                    this.orderForm.get('orderDate').patchValue(moment(x.orderDate).format("YYYY-MM-DD"));
+                    this.orderForm.get('orderDate').setValue(moment(x.orderDate).format("YYYY-MM-DD"));
+                    this.orderForm.get('gainLossPercentage').setValue((parseFloat(x.gainLossPercentage)*100).toFixed(2));
                 });
         }
 
     }
+
 
     initialOrderFormGroup(): void {
         let now = moment().format("YYYY-MM-DD");
         //let now = (new Date()).toISOString().substring(0, 10);
         console.log(now);
         this.orderForm = this.formBuilder.group({
-            id: [],
             orderDate: [now, Validators.required],
             name: ['', Validators.required],
             symbol: ['', Validators.required],
@@ -108,7 +108,7 @@ export class AddEditComponent implements OnInit {
     }
 
     private createOrder() {
-        this.orderService.create(this.orderForm.value)
+        this.orderService.create(Object.assign(this.orderForm.value, {gainLossPercentage: this.orderForm.get('gainLossPercentage').value/100}))
             .pipe(first())
             .subscribe({
                 next: () => {
@@ -123,7 +123,9 @@ export class AddEditComponent implements OnInit {
     }
 
     private updateOrder() {
-        this.orderService.update(this.id, this.orderForm.value)
+        const _orderId = this.route.snapshot.paramMap.get('id');
+        const _gainLossPercentage = parseFloat(this.orderForm.get('gainLossPercentage').value)/100;
+        this.orderService.update(this.id,{...{id: _orderId}, ...this.orderForm.value,...{gainLossPercentage:_gainLossPercentage}})
             .pipe(first())
             .subscribe({
                 next: () => {

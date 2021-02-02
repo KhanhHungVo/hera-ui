@@ -1,7 +1,6 @@
 import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
-
 import { OrderService } from '@app/core/services';
 
 @Component({ templateUrl: 'list.component.html' })
