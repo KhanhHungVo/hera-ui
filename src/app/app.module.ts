@@ -127,7 +127,7 @@ export function provideConfig() {
     provide: AuthServiceConfig,
     useFactory: provideConfig
   },
-  fakeBackendProvider
+   //fakeBackendProvider
 
 ],
   bootstrap: [ AppComponent ]

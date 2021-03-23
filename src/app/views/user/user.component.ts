@@ -2,7 +2,7 @@
 import { AlertService } from '@app/core/services';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, DebugElement, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { SocialUser, AuthService, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { HttpClient } from '@angular/common/http';
 import { User } from '@app/core/models';
@@ -21,7 +21,7 @@ export class UserComponent implements OnInit {
   userForm: FormGroup;
   isEditMode: boolean = false;
   constructor(private authService: AuthenticationService, private fb: FormBuilder, private actRoute: ActivatedRoute, private alertService: AlertService) {
-    
+    debugger
   }
 
   get firstName() {
@@ -65,16 +65,18 @@ export class UserComponent implements OnInit {
     this.user = this.authService.currentUserValue;
     //const id = this.actRoute.snapshot.paramMap.get('id');
     //this.userForm.setValue(user);
+    if(this.user){
+      this.userForm.patchValue({
+        userName: this.user.userName,
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        email: this.user.email,
+        profilePicture: this.user.profilePicture,
+        dob: this.user.dateOfBirth,
+        phoneNumber: this.user.phoneNumber
+      })
+    }
     
-    this.userForm.patchValue({
-      userName: this.user.userName,
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-      email: this.user.email,
-      profilePicture: this.user.profilePicture,
-      dob: this.user.dateOfBirth,
-      phoneNumber: this.user.phoneNumber
-    })
   }
 
   onUpdateForm() {
@@ -98,7 +100,7 @@ export class UserComponent implements OnInit {
       lastName: [''],
       email: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       phoneNumber: ['', [Validators.pattern('^[0-9]+$')]],
-      dob:[''],
+      dob: new FormControl({value:'', disabled: !this.isEditMode}),
       profilePicture: ['']
     })
   }
