@@ -127,6 +127,8 @@ export function provideConfig() {
     provide: AuthServiceConfig,
     useFactory: provideConfig
   },
+  { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
    //fakeBackendProvider
 
 ],

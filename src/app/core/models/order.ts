@@ -12,5 +12,7 @@ export class Order extends Resource{
     marketValue : number;
     gainLossPercentage : string;
     gainLoss : string;
-    done: boolean;
+    done: boolean
+    
+    ;
 }

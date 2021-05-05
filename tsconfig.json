@@ -29,7 +29,7 @@
         "app/views/*"
       ],
       "@env/*": [
-        "environments/environment"
+        "environments/*"
       ]
     },
   }
