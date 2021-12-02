@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-md-4">
+    <div class="card card-user">
+      <div class="image">
+      </div>
+      <div class="card-body">
+        <div class="author">
+          <div class="col-sm-4">
+            <img class="img-avatar" [src]="profilePicture || 'assets/img/avatars/2.jpg' " alt="...">
+          </div>
+          <div class="col-sm-8">
+            <h5 class="title col-md-10">{{fullName}}</h5>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <hr>
+        <div class="button-container">
+          <!-- <div class="row">
+                <div class="col-lg-3 col-md-6 col-6 ml-auto">
+                  <h5>12
+                    <br>
+                    <small>Files</small>
+                  </h5>
+                </div>
+                <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
+                  <h5>2GB
+                    <br>
+                    <small>Used</small>
+                  </h5>
+                </div>
+                <div class="col-lg-3 mr-auto">
+                  <h5>24,6$
+                    <br>
+                    <small>Spent</small>
+                  </h5>
+                </div>
+              </div> -->
+          <div class="row">
+            <h6>Invested Value: 1.000.000 VND</h6>
+          </div>
+          <div class="row">
+            <h6>Market Value: 1.500.000 VND</h6>
+          </div>
+          <div class="row">
+            <h6>Withdrawn Value: 500.000 VND</h6>
+          </div>
+          <div class="row">
+            <h6>Total gain/loss: + 1000.000 VND</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="col-md-8">
+    <div class="card">
+      <!-- <div class="card-header">
+            <h5 class="card-title">{{user.firstName}} {{user.lastName}} </h5>
+          </div> -->
+      <div class="card-body">
+        <form [formGroup]="userForm" (ngSubmit)="onUpdateForm()">
+          <!-- <form> -->
+          <!-- <alert></alert> -->
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Username</label>
+                <input type="text" class="form-control" formControlName="userName" name="userName"
+                  [attr.disabled]="isEditMode?null:''">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" formControlName="email" name="email"
+                  [attr.disabled]="isEditMode?null:''">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>First Name</label>
+                <input type="text" class="form-control" formControlName="firstName" name="firstName"
+                  [attr.disabled]="isEditMode?null:''">
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" class="form-control" formControlName="lastName" name="lastName"
+                  [attr.disabled]="isEditMode?null:''">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>
+                  Date of Birth
+                </label>
+                <div>
+                  <mat-form-field>
+                    <input matInput [matDatepicker]="myDatepicker" formControlName="dob" (dateChange)="date($event)"
+                      [disabled]="!isEditMode">
+                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #myDatepicker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>
+                  Phone Number
+                </label>
+                <input type="text" class="form-control" formControlName="phoneNumber" name="phoneNumber"
+                  [attr.disabled]="isEditMode?null:''">
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="update ml-auto mr-auto">
+              <button *ngIf="isEditMode" type="submit" class="btn btn-dark btn-round">Update</button>
+              <button *ngIf="isEditMode" (click)="onExit()" class="btn btn-light btn-round">Exit</button>
+              <button *ngIf="!isEditMode" (click)="onChangeEditMode()" class="btn btn-primary">Edit</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

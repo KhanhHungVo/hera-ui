@@ -6,11 +6,11 @@
     "module": "esnext",
     "target": "es5",
     "types": [],
-    "paths": {
-      "@angular/*": [
-        "../node_modules/@angular/*"
-      ]
-    }
+    // "paths": {
+    //   "@angular/*": [
+    //     "../node_modules/@angular/*"
+    //   ]
+    // }
   },
   "angularCompilerOptions": {
     "enableIvy": false

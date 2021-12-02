@@ -1,8 +1,10 @@
+import { UserComponent } from './views/user/user.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
+import { AuthGuard } from './core/guards/auth.guard';
 
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
@@ -46,6 +48,7 @@ export const routes: Routes = [
   },
   {
     path: '',
+    canActivate: [AuthGuard],
     component: DefaultLayoutComponent,
     data: {
       title: 'Home'
@@ -78,6 +81,20 @@ export const routes: Routes = [
       {
         path: 'theme',
         loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
+      },
+      {
+        path: 'user',
+        component: UserComponent,
+        data: {
+          title: 'User Info'
+        }
+      },
+      {
+        path:'orders',
+        data: {
+          title: 'Orders'
+        },
+        loadChildren: () => import('./views/orders/order.module').then(x =>x.OrderModule)
       },
       {
         path: 'widgets',
