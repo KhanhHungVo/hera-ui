@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Coin } from '@app/core/models';
+import { CryptoService } from '@app/core/services/crypto.service';
 
 @Component({
   selector: 'app-crypto-list',
@@ -7,13 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CryptoListComponent implements OnInit {
 
-  constructor() { }
+  private cryptos : Coin[];
+  isLoading = false;
+  constructor(private cryptoService: CryptoService) { }
 
   ngOnInit(): void {
   }
 
   getTopMarketCapCoins() {
-
+    this.isLoading = true;
+    this.cryptoService.getTopMarketCoins().subscribe(data=> {this.cryptos = data;}, () => this.isLoading = false, () => this.isLoading = false);
   }
 
 }

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Order } from '../models';
 import { Injectable } from '@angular/core';
 
-const baseUrl = `${environment.apiUrl}/Orders`;
+const orderUrl = `${environment.apiUrl}/Orders`;
 @Injectable({
     providedIn: 'root'
 })
@@ -13,22 +13,22 @@ export class OrderService {
     }
 
     getAll() {
-        return this.http.get<Order[]>(baseUrl);
+        return this.http.get<Order[]>(orderUrl);
     }
 
     getById(id: string) {
-        return this.http.get<Order>(`${baseUrl}/${id}`);
+        return this.http.get<Order>(`${orderUrl}/${id}`);
     }
 
     create(params: Order) {
-        return this.http.post(baseUrl, params);
+        return this.http.post(orderUrl, params);
     }
 
     update(id: string, params) {
-        return this.http.put(`${baseUrl}/${id}`, params);
+        return this.http.put(`${orderUrl}/${id}`, params);
     }
 
     delete(id: string) {
-        return this.http.delete(`${baseUrl}/${id}`);
+        return this.http.delete(`${orderUrl}/${id}`);
     }
 }
