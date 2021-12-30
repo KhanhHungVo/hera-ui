@@ -49,12 +49,12 @@ export class AddEditComponent implements OnInit {
                 this.orderForm.controls.gainLossPercentage.patchValue(gainLossPercentage.toFixed(2), {emitEvent:false});
             }
         });
-        
+
         if (!this.isAddMode) {
             this.orderService.getById(this.id)
                 .pipe(first())
                 .subscribe(x => {
-                    this.orderForm.patchValue(x); 
+                    this.orderForm.patchValue(x);
                     this.orderForm.get('orderDate').setValue(moment(x.orderDate).format("YYYY-MM-DD"));
                     this.orderForm.get('gainLossPercentage').setValue((parseFloat(x.gainLossPercentage)*100).toFixed(2));
                 });
@@ -64,11 +64,8 @@ export class AddEditComponent implements OnInit {
 
 
     initialOrderFormGroup(): void {
-        let now = moment().format("YYYY-MM-DD");
-        //let now = (new Date()).toISOString().substring(0, 10);
-        console.log(now);
         this.orderForm = this.formBuilder.group({
-            orderDate: [now, Validators.required],
+            orderDate: [moment().format("YYYY-MM-DD"), Validators.required],
             name: ['', Validators.required],
             symbol: ['', Validators.required],
             volume: [''],
@@ -98,7 +95,7 @@ export class AddEditComponent implements OnInit {
         }
 
         this.loading = true;
-        
+
         if (this.isAddMode) {
             this.createOrder();
         } else {
@@ -139,5 +136,5 @@ export class AddEditComponent implements OnInit {
             });
     }
 
-    
+
 }

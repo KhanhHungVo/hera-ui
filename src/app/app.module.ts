@@ -14,9 +14,6 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 
 
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 
 
 
@@ -59,10 +56,7 @@ import { ChartsModule } from 'ng2-charts';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { HttpTokenInterceptor, HttpErrorInterceptor } from './core/interceptors';
 import { fakeBackendProvider } from './core/helper/face-backend';
-
-
-
-
+import { CryptoListComponent } from './views/cryptos/crypto-list/crypto-list.component';
 
 const config = new AuthServiceConfig([
   {
@@ -78,8 +72,6 @@ const config = new AuthServiceConfig([
 export function provideConfig() {
   return config;
 }
-
-
 
 @NgModule({
   imports: [
@@ -107,7 +99,7 @@ export function provideConfig() {
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule
-    
+
   ],
   declarations: [
     AppComponent,
@@ -116,7 +108,8 @@ export function provideConfig() {
     P500Component,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
+    CryptoListComponent,
   ],
   providers: [
   {
@@ -129,8 +122,7 @@ export function provideConfig() {
   },
   { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
   { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
-   //fakeBackendProvider
-
+  fakeBackendProvider
 ],
   bootstrap: [ AppComponent ]
 })
